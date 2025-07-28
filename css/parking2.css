@@ -1,0 +1,114 @@
+body {
+    color: white;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: #1e1e1e;
+}
+h4
+{
+font-size: xx-large;
+}
+.navbar {
+    background: rgb(192, 192, 192);
+    padding: 10px; 
+    font-size: 20px;
+color: black;
+width: 100%;
+animation: fadeIn 1s ease-in-out forwards 0.3s;
+}
+.back-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+}
+.tables-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* المسافة بين الجدولين */
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+.table-container {
+    background: rgba(255, 255, 255, 0.014); /* خلفية شفافة */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-right: 2px;
+    position: relative;
+
+     /* زيادة المسافة بين الجدولين والفوتر */
+
+    
+}
+
+.table-container span {
+    background-color: rgb(187, 187, 22); /* لون الخط */
+    width: 92%; /* يمتد بعرض الجدول */
+    height: 8px; /* سمك الخط */
+    position: absolute;
+    top: 54%; /* يضعه في منتصف الجدول */
+    left: 23px;
+    transform: translateY(-50%); /* لضبط المحاذاة */
+    z-index: 1; /* يجعله يظهر فوق الجدول */
+}
+.parking-table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.parking-table td {
+width:270px; /* زيادة عرض الخلايا */
+height: 220px; /* زيادة ارتفاع الخلايا */
+text-align: center;
+border: 4px solid white; /* جعل الحدود أكثر وضوحًا */
+color: white;
+border-radius: 5px;
+font-weight: bold;
+font-size: 50px; /* تكبير حجم النص */
+}
+
+.car {
+    font-size: 80px;
+    opacity: 0; /* تمت إزالة !important */
+    transform: translateY(80px) scale(0.5);
+    animation: fadeInUp 1s ease-in-out forwards;
+    display: inline-block;
+}
+
+.parking-table td:nth-child(1) .car { animation-delay: 0.2s; }
+.parking-table td:nth-child(2) .car { animation-delay: 0.4s; }
+.parking-table td:nth-child(3) .car { animation-delay: 0.6s; }
+.parking-table td:nth-child(4) .car { animation-delay: 0.8s; }
+.parking-table td:nth-child(5) .car { animation-delay: 1s; }
+
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(80px) scale(0.5); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.car:active {
+    animation: moveCar 0.5s ease-in-out;
+}
+
+@keyframes moveCar {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(30px); }
+    100% { transform: translateX(0); }
+}
+
+.footer {
+    background: rgb(192, 192, 192);
+    color: black;
+    font-size: large;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/parking2.css">
+    <style>
+       
+    </style>
+</head>
+<body>
+    <nav class="navbar d-flex justify-content-between">
+        <i class="fas fa-arrow-left back-icon" onclick="window.location.href='index.html'"></i>
+        <span class="fw-bold">AITU Parking</span>
+        <span></span>
+    </nav>
+
+    <div class="tables-container">
+        <!-- الجدول الأول -->
+        <div class="table-container">
+            <h4>Zone 1</h4>
+        
+            <table class="parking-table">
+                <tr>
+                    <td style="color: #ffc107 " id="b1">P1</td>
+                    <td style="color: #ffc107" id="b2">P2</td>
+                </tr>
+                <tr>
+                    <td style="color: #ffc107" id="b3">P3</td>
+                    <td style="color:  #ffc107" id="b4">P4</td>
+                </tr>
+            </table>
+        </div>
+        
+
+        <!-- الجدول الثاني -->
+                     <div class="table-container">
+            <h4> Zone 2</h4>
+
+            <table class="parking-table">
+                <tr>
+                    <td style="color: #ffc107"id="b5">P5</td>
+                    <td style="color: #ffc107"id="b6">P6</td>
+                   
+                </tr>
+                <tr>
+                    <td style="color: #ffc107"id="b10">P7</td>
+                    <td style="color:  #ffc107"id="b11">P8</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">&copy; 2025 AITU Parking. All rights reserved.</div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+    
+        const firebaseConfig = {
+            apiKey: "RwBWYj1j1t9bQBiLqWfg4bzd0VdG2687hgl7ggcU",
+            authDomain: "smart-parking-e989c.firebaseapp.com",
+            databaseURL: "http://smart-parking-12007-default-rtdb.firebaseio.com",
+            projectId: "smart-parking-e989c",
+            storageBucket: "smart-parking-e989c.appspot.com",
+            messagingSenderId: "21012709472",
+            appId: "1:21012709472:web:d4ec89677354aa922b8305",
+            measurementId: "G-Y5VD99DFQY"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+    
+        // قائمة تحتوي على أرقام المربعات بالترتيب
+        const parkingSpots = [
+            { id: "b1", place: "B1", label: "P1" },
+            { id: "b2", place: "B2", label: "P2" },
+            { id: "b3", place: "B3", label: "P3" },
+            { id: "b4", place: "B4", label: "P4" },
+            { id: "b5", place: "B5", label: "P5" },
+            { id: "b6", place: "B6", label: "P6" },
+            { id: "b10", place: "B7", label: "P7" },
+            { id: "b11", place: "B8", label: "P8" }
+        ];
+    
+        function read_db(elementId, place, label) {
+    let connect_db = ref(db, 'Places/' + place);
+    onValue(connect_db, (snapshot) => {
+        const retrieve_data = snapshot.val();
+        let element = document.getElementById(elementId);
+        
+        if (element) {
+            if (retrieve_data && retrieve_data.Status === true) {
+                element.innerHTML = `<i class='fas fa-car car' style='color: white;'></i>`;
+                
+                // تأخير تنفيذ الأنيميشن بعد إدراج العنصر
+                setTimeout(() => {
+                    let carElement = element.querySelector('.car');
+                    if (carElement) {
+                        // carElement.style.opacity = "1";
+                        // carElement.style.transform = "translateY(0) scale(1)";
+                    }
+                }, 30);
+            } else {
+                element.innerHTML = label; // عرض التسمية المخصصة مثل P1, P2, ...
+                element.style.color = "#ffc107"; // يبقى النص أصفر
+            }
+        }
+    }, { onlyOnce: false });
+}
+
+        // استدعاء الوظيفة لكل مربع مع تمرير التسمية المخصصة
+        parkingSpots.forEach(spot => {
+            read_db(spot.id, spot.place, spot.label);
+        });
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

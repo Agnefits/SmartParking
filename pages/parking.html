@@ -1,0 +1,88 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/parking.css">
+</head>
+<body>
+    <nav class="navbar d-flex justify-content-between">
+        <i class="fas fa-arrow-left back-icon" onclick="window.location.href='index.html'"></i>
+        <span class="fw-bold">AITU Parking</span>
+        <span></span>
+    </nav>
+
+    <div class="yellow-line"></div>
+
+    <table class="parking-table">
+        <tr>
+            <td id="b1">B1</td>
+            <td class="available">B2</td>
+            <td id="b2">B3</td>
+            <td class="waiting">B4</td>
+            <td id="b3">B5</td>
+        </tr>
+        <tr>
+            <td class="not-available">B6</td>
+            <td id="b4">B7</td>
+            <td class="available">B8</td>
+            <td id="b5">B9</td>
+            <td class="available" >B10</td>
+            
+        </tr>
+    </table>
+
+    <div class="footer">&copy; 2025 EGC Parking. All rights reserved.</div>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.18.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "RwBWYj1j1t9bQBiLqWfg4bzd0VdG2687hgl7ggcU",
+            authDomain: "smart-parking-e989c.firebaseapp.com",
+            databaseURL: "http://smart-parking-12007-default-rtdb.firebaseio.com",
+            projectId: "smart-parking-e989c",
+            storageBucket: "smart-parking-e989c.appspot.com",
+            messagingSenderId: "21012709472",
+            appId: "1:21012709472:web:d4ec89677354aa922b8305",
+            measurementId: "G-Y5VD99DFQY"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase();
+
+        function read_db(elementId, place) {
+    let connect_db = ref(db, 'Places/' + place);
+    onValue(connect_db, (snapshot) => {
+        const retrieve_data = snapshot.val();
+        let element = document.getElementById(elementId);
+        
+        if (element) {
+            if (retrieve_data?.Status) {
+                element.innerHTML = `<i class='fas fa-car car'></i>`;
+            } else {
+                element.innerHTML = place; // عرض اسم المكان كقيمة افتراضية
+                element.style.color = "black"; // تغيير اللون للأماكن الفارغة
+            }
+        }
+    }, { onlyOnce: false }); // يضمن التحديث عند أي تغيير في قاعدة البيانات
+}
+
+
+
+ 
+        read_db("b1", "B1");
+        read_db("b2", "B2");
+        read_db("b3", "B3");
+        read_db("b4", "B4");
+        read_db("b5", "B5");
+        read_db("b6", "B6");
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> -->
